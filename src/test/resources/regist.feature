@@ -145,15 +145,6 @@ Feature: Hotel Planisphere Member Regist Feature.
         Then wait "3" second
 
 
-    Scenario: open the regist page with iPhone X Emulator.
-  	  	When The browser is started in English mode
-    		When The broeser set Mobile"iPhone X" mode
-        Given The webDriver is chosen in "Chrome"
-#open Hotel Planisphere TOP page
-        Given Page open "https://hotel.testplanisphere.dev/en-US/index.html"
-#        When  Maximise Window
-        Then wait "2" second
-
 		Scenario Outline: Confirmation of original member with iPhone X
 				When Click Navigation button
         When Click link "Login"

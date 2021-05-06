@@ -3,6 +3,7 @@ package planisphereTestByMobileEmulatorEnglish;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -185,8 +186,8 @@ public class WebConnector {
         Thread.sleep(2000);
     }
 
-    public void rebootBrowser(String mobileBrowserType, String mobileUrl) throws InterruptedException {
-
+    public void rebootBrowser(String mobileMode, int mobileWidth, int mobileHeight, double mobilePixel, String mobileBrowserType, String mobileUrl) throws MalformedURLException, InterruptedException {
+    	setMobileEmulator(mobileMode, mobileWidth, mobileHeight, mobilePixel);
     	selectWebDriver(mobileBrowserType);
     	openAndWait(mobileUrl);
 

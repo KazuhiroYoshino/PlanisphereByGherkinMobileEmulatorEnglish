@@ -135,6 +135,6 @@ Feature: Reserve Plan List Page
 		Scenario: return to home
 	  		When  Return to HOME
 				When Click Navigation button
-        When Logout
+         When Logout
         Then wait "1" second
 				When close test scenario

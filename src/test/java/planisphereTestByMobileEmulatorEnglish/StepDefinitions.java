@@ -2,6 +2,8 @@ package planisphereTestByMobileEmulatorEnglish;
 
 import static org.junit.Assert.*;
 
+import java.net.MalformedURLException;
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -831,7 +833,7 @@ public class StepDefinitions {
     }
 
     @Then("^test Total-Bill \"([^\"]*)\"$")
-    public void testPrice(String price) throws InterruptedException {
+    public void testPrice(String price) throws InterruptedException, MalformedURLException {
     	String selector = "total-bill";
     	boolean res;
 
@@ -842,8 +844,13 @@ public class StepDefinitions {
         	connector.destroySelenium();
         	Thread.sleep(2000);
         	connector.setLangEnglish();
-        	connector.rebootBrowser(mobileBrowserType,mobileUrl);
-        	connector.setWindowMax();
+        	connector.rebootBrowser(mobileMode, mobileWidth, mobileHeight, mobilePixel,mobileBrowserType,mobileUrl);
+        	if(mobileMode.equals("iPad Mini")) {
+
+        	}else {
+            	connector.btnClickAndWait_CSS("span.navbar-toggler-icon");
+        	}
+//        	connector.setWindowMax();
         	if(id != null) {
         		connector.linkClickAndWait("Login");
         		Thread.sleep(1000);

@@ -121,9 +121,10 @@ Feature: Reserve feature
 	Scenario: Normal member case
 				When Click Navigation button
         When Click link "Login"
-        And  input "diana@example.com" into mail address area
-        And  input "pass1234" into password area
+        And  input "miles@example.com" into mail address area
+        And  input "pass-pass" into password area
         When  push Login button
+        And get mail address and username and telephonenumber
     		Then wait "2" second
 
 	Scenario Outline: Normal member stay plan test case
@@ -226,6 +227,7 @@ Feature: Reserve feature
         And  input "clark@example.com" into mail address area
         And  input "password" into password area
         When  push Login button
+        And get mail address and username and telephonenumber
     		Then wait "2" second
 
 	Scenario Outline: Premium member stay plan test case

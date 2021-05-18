@@ -28,7 +28,14 @@ public class StepDefinitions {
     private static String id;
     private static String passwd;
 
-//    public void WebSteps(WebConnector connector) {
+/**
+ * 会員登録済みユーザーは、マイページから氏名と電話番号を確認できる
+ * ただし、電話番号は任意
+ */
+    private static String memberName;
+    private static String memberTel;
+    private static String memberMail;
+        //    public void WebSteps(WebConnector connector) {
 //        this.connector = connector;
 //    }
 
@@ -38,9 +45,10 @@ public class StepDefinitions {
  * 　　　　　 "IE", "Edge", "FireFox", "Opera", "Chrome"
  * 　　ただし、Edge はまともに動きません
  * @throws InterruptedException
+ * @throws MalformedURLException
  */
 	@Given("^The webDriver is chosen in \"([^\"]*)\"$")
-    public void select_webdriver(String browserType) throws InterruptedException {
+    public void select_webdriver(String browserType) throws InterruptedException, MalformedURLException {
 		mobileBrowserType = browserType;
 		connector.selectWebDriver(browserType);
     }
@@ -73,25 +81,161 @@ public class StepDefinitions {
 
     @When("^The broeser set Mobile\"([^\"]*)\" mode$")
     public void mobileMode(String mobile) {
+    	String mobileType = null;
     	int width = 0;
     	int height = 0;
     	double pixelratio = 0;
     	mobileMode = mobile;
 
     	switch(mobile) {
-    	case("Nexus 5X"):
+    	case("BlackBerryZ30"):
+    		mobileType = "BlackBerry Z30";
+    		width = 360;
+    		height = 640;
+    		pixelratio = 2;
+    		break;
+    	case("BlackBerryPlayBook"):
+    		mobileType = "Blackberry PlayBook";
+    		width = 1024;
+    		height = 600;
+    		pixelratio = 1;
+    		break;
+    	case("Nexus4"):
+    		mobileType = "Nexus 4";
+    		width = 384;
+    		height = 640;
+    		pixelratio = 2;
+    		break;
+    	case("Nexus5"):
+    		mobileType = "Nexus 5";
+    		width = 360;
+    		height = 640;
+    		pixelratio = 3;
+    		break;
+    	case("Nexus5X"):
+    		mobileType = "Nexus 5X";
     		width = 412;
     		height = 732;
     		pixelratio = 2.625;
     		break;
-    	case("iPad Mini"):
+    	case("Nexus6"):
+    		mobileType = "Nexus 6";
+    		width = 412;
+    		height = 732;
+    		pixelratio = 3.5;
+    		break;
+    	case("Nexus6P"):
+    		mobileType = "Nexus 6P";
+    		width = 412;
+    		height = 732;
+    		pixelratio = 3.5;
+    		break;
+    	case("Nexus10"):
+    		mobileType = "Nexus 10";
+    		width = 1280;
+    		height = 800;
+    		pixelratio = 2;
+    		break;
+    	case("Nexus7"):
+    		mobileType = "Nexus 7";
+    		width = 6000;
+    		height = 960;
+    		pixelratio = 2;
+    		break;
+    	case("Pixel2"):
+    		mobileType = "Pixel 2";
+    		width = 411;
+    		height = 731;
+    		pixelratio = 2.625;
+    		break;
+    	case("Pixel2_XL"):
+    		mobileType = "Pixel 2 XL";
+    		width = 411;
+    		height = 823;
+    		pixelratio = 3.5;
+    		break;
+    	case("NokiaN9"):
+    		mobileType = "Nokia N9";
+    		width = 480;
+    		height = 854;
+    		pixelratio = 1;
+    		break;
+    	case("MicrosoftLumia950"):
+    		mobileType = "Microsoft Lumia 950";
+    		width = 360;
+    		height = 640;
+    		pixelratio = 4;
+    		break;
+    	case("GalaxyS5"):
+    		mobileType = "Galaxy S5";
+    		width = 360;
+    		height = 640;
+    		pixelratio = 3;
+    		break;
+    	case("KindleFireHDX"):
+    		mobileType = "Kindle Fire HDX";
+    		width = 1280;
+    		height = 800;
+    		pixelratio = 2;
+    		break;
+    	case("Laptoptouch"):
+    		mobileType = "Laptop with touch";
+    		width = 1280;
+    		height = 950;
+    		pixelratio = 1;
+    		break;
+    	case("LaptopHiDPI"):
+    		mobileType = "Laptop with HiDPI screen";
+    		width = 1440;
+    		height = 900;
+    		pixelratio = 2;
+    		break;
+    	case("MotoG4"):
+    		mobileType = "Moto G4";
+    		width = 360;
+    		height = 640;
+    		pixelratio = 3;
+    		break;
+    	case("iPad_Mini"):
+    		mobileType = "iPad Mini";
     		width = 1024;
     		height = 768;
     		pixelratio = 2;
     		break;
-    	case("iPhone X"):
-    		width = 812;
-    		height = 375;
+    	case("iPad"):
+    		mobileType = "iPad";
+    		width = 1024;
+    		height = 768;
+    		pixelratio = 2;
+    		break;
+    	case("iPad_PRO"):
+    		mobileType = "iPad PRO";
+    		width = 1366;
+    		height = 1024;
+    		pixelratio = 2;
+    		break;
+    	case("iPhone_5"):
+    		mobileType = "iPhone 5";
+    		width = 320;
+    		height = 568;
+    		pixelratio = 2;
+    		break;
+    	case("iPhone_678"):
+    		mobileType = "iPhone 6/7/8";
+    		width = 375;
+    		height = 667;
+    		pixelratio = 2;
+    		break;
+    	case("iPhone_678_PLUS"):
+    		mobileType = "iPhone 6/7/8 Plus";
+    		width = 414;
+    		height = 736;
+    		pixelratio = 3;
+    		break;
+    	case("iPhone_X"):
+    		mobileType = "iPhone X";
+    		width = 375;
+    		height = 812;
     		pixelratio = 3;
     		break;
     	default:
@@ -108,6 +252,16 @@ public class StepDefinitions {
     @Then("^Screen refresh$")
     public void refresh() throws InterruptedException {
     	connector.refresh();
+    }
+
+/**
+ * 画面下段に移動する
+ */
+    @Then("^move to Logo$")
+    public void moveToLogo() {
+    	String selector = "/html/body/footer/div/p";
+
+    	connector.moveToElement(selector);
     }
 
     @When("\"([^\"]*)\"で指定できるカレンダー表示を消して")
@@ -323,6 +477,26 @@ public class StepDefinitions {
 //    	connector.cssButtonClickAndPopUp(commandLocater);
 //    }
 
+/**
+ * 画面から取得系
+ * @throws InterruptedException
+ */
+    @And("^get mail address and username and telephonenumber$")
+    public void getMemberInfo() throws InterruptedException {
+      	String selector;
+
+       	selector = "username";
+       	memberName = connector.getString(selector);
+
+       	selector = "email";
+       	memberMail = connector.getString(selector);
+
+       	selector = "tel";
+       	memberTel = connector.getString(selector);
+       	if(memberTel.equals("not answered")) {
+       		memberTel = null;
+       	}
+    }
 
 /** 入力系 */
 
@@ -392,37 +566,37 @@ public class StepDefinitions {
 
     	switch(startDay) {
     	case("Sunday"):
-            connector.sunday(commandLocater);
+            connector.sundayEN(commandLocater);
             weekEnd = 0;
             connector.dateFromSet();
             break;
     	case("Monday"):
-            connector.monday(commandLocater);
+            connector.mondayEN(commandLocater);
             weekEnd = 0;
             connector.dateFromSet();
             break;
     	case("Tuesday"):
-            connector.tuesday(commandLocater);
+            connector.tuesdayEN(commandLocater);
             weekEnd = 0;
             connector.dateFromSet();
             break;
     	case("Wednesday"):
-            connector.wednesday(commandLocater);
+            connector.wednesdayEN(commandLocater);
             weekEnd = 0;
             connector.dateFromSet();
             break;
     	case("Thursday"):
-            connector.thursday(commandLocater);
+            connector.thursdayEN(commandLocater);
             weekEnd = 0;
             connector.dateFromSet();
             break;
     	case("Friday"):
-            connector.friday(commandLocater);
+            connector.fridayEN(commandLocater);
             weekEnd = 0;
             connector.dateFromSet();
             break;
     	case("Saturday"):
-            connector.saturday(commandLocater);
+            connector.saturdayEN(commandLocater);
             weekEnd = 0;
             connector.dateFromSet();
             break;
@@ -441,7 +615,7 @@ public class StepDefinitions {
         termValueWeekEnd = weekEnd;
         int term = termValue + termValueWeekEnd;
         connector.inputAndWait(commandLocater, termText);
-        connector.termSet(term);
+        connector.termSetEN(term);
     }
 
     @When("^user inputs \"([^\"]*)\" as guests$")
@@ -475,9 +649,13 @@ public class StepDefinitions {
 
     @When("^user inputs \"([^\"]*)\" as Name$")
     public void nameSetting(String name) throws InterruptedException {
-    	String commandLocater = "username";
+    	String selector = "username";
+    	String existChr;
 
-    	connector.inputAndWait(commandLocater, name);
+    	existChr = connector.getText(selector);
+    	if(existChr.length() == 0) {
+    		connector.inputAndWait(selector, name);
+    	}
     }
 
     @And("^user selects \"([^\"]*)\" and inputs \"([^\"]*)\" as Telephone number or inputs \"([^\"]*)\" as mail address$")
@@ -485,15 +663,25 @@ public class StepDefinitions {
     	String selector1 = "contact";
     	String selector2 = "tel";
     	String selector3 = "email";
+    	String existChr;
 
     	connector.dropDownSelect(selector1, contact);
     	contactType = contact;
     	Thread.sleep(1000);
-    	if(tel.length() != 0) {
-    		connector.inputAndWait(selector2, tel);
-    	}
-    	if(email.length() != 0) {
-    		connector.inputAndWait(selector3, email);
+    	switch(contact) {
+    	case("By telephone"):
+    		existChr = connector.getText(selector2);
+    		if((tel.length() != 0)&&(existChr.length() == 0)) {
+    			connector.inputAndWait(selector2, tel);
+    		}
+    		break;
+    	case("By email"):
+    		existChr = connector.getText(selector3);
+        	if((email.length() != 0)&&(existChr.length() == 0)) {
+        		connector.inputAndWait(selector3, email);
+        	}
+    		break;
+    	default:
     	}
     }
 
@@ -584,7 +772,7 @@ public class StepDefinitions {
     public void inputBirthday(String birthday) throws InterruptedException {
     	String selector = "birthday";
 
-    	connector.birthdayInput(selector, birthday);
+    	connector.birthdayInputEN(selector, birthday);
     }
 
     @And("^check \"([^\"]*)\" in notification select$")
@@ -837,14 +1025,14 @@ public class StepDefinitions {
     	String selector = "total-bill";
     	boolean res;
 
-        res = connector.testPrice(selector, Double.valueOf(price));
+        res = connector.testPriceEN(selector, Double.valueOf(price));
         if(res == true) {
         	assertTrue(res);
         }else {
         	connector.destroySelenium();
         	Thread.sleep(2000);
         	connector.setLangEnglish();
-        	connector.rebootBrowser(mobileMode, mobileWidth, mobileHeight, mobilePixel,mobileBrowserType,mobileUrl);
+        	connector.rebootBrowserMB(mobileMode, mobileWidth, mobileHeight, mobilePixel,mobileBrowserType,mobileUrl);
         	if(mobileMode.equals("iPad Mini")) {
 
         	}else {
@@ -941,7 +1129,7 @@ public class StepDefinitions {
     	String selector = "term";
 
     	try {
-        	assertTrue(connector.testTerm(selector, termValue + termValueWeekEnd));
+        	assertTrue(connector.testTermEN(selector, termValue + termValueWeekEnd));
     	}catch(Exception e) {
     		System.out.println(connector.dateFrom);
     		System.out.println(connector.dateTo);
@@ -1022,6 +1210,9 @@ public class StepDefinitions {
     public void testUsername(String username) throws InterruptedException {
     	String selector = "username";
 
+    	if(username.length() == 0) {
+    		username = connector.username;
+    	}
 //    	username = username + "様";
     	assertTrue(connector.testText(selector, username));
     }
@@ -1039,10 +1230,16 @@ public class StepDefinitions {
     		assertTrue(connector.testText(selector, contactText));
     		break;
     	case("By telephone"):
+    		if(telText.length() == 0) {
+    			telText = connector.tel;
+    		}
     		contactText = "Tel" + ": " + telText;
 			assertTrue(connector.testText(selector, contactText));
     		break;
     	case("By email"):
+    		if(emailText.length() == 0) {
+    			emailText = connector.email;
+    		}
     		contactText = "Email" + ": " + emailText;
 			assertTrue(connector.testText(selector, contactText));
     		break;
